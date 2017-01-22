@@ -61,12 +61,12 @@ public class TodoListStorage {
     /**
      * Pseudo-struct grouping all todoItem data
      */
-    public class TodoItem {
+    public static class TodoItem {
         public final String title;
         public final String body;
         public final int status;
-        public final int creationDate;
-        public final int endingDate;
+        public final long creationDate;
+        public final long endingDate;
 
         /**
          * Build the struct with given parameters
@@ -76,7 +76,7 @@ public class TodoListStorage {
          * @param c creation date of the item
          * @param e ending date of the item
          */
-        public TodoItem(@NonNull String t, @NonNull String b, int s, int c, int e) {
+        public TodoItem(@NonNull String t, @NonNull String b, int s, long c, long e) {
             title = t;
             body = b;
             status = s;
@@ -121,7 +121,7 @@ public class TodoListStorage {
                     context,
                     "EpitechTodoList.db",
                     null,
-                    0);
+                    1);
             _db = _openHelper.getWritableDatabase();
         }
         _context = context;
@@ -162,7 +162,7 @@ public class TodoListStorage {
      * @param endingDate the endingDate of the item (in posix timestamp)
      */
     public void insertTodoItem(@NonNull String title, @NonNull String body,
-                               int status, int endingDate) {
+                               int status, long endingDate) {
         insertTodoItemDb(title, body, status, endingDate);
     }
 
@@ -177,7 +177,7 @@ public class TodoListStorage {
     }
 
     private void insertTodoItemDb(@NonNull String title, @NonNull String body, int status,
-                                  int endingDate) {
+                                  long endingDate) {
         if (_context == null)
             throw new RuntimeException("Context not settled");
         if (status != TodoStatus.NOT_DONE.ordinal() && status != TodoStatus.DONE.ordinal())
@@ -222,8 +222,8 @@ public class TodoListStorage {
                     rows.getString(0),
                     rows.getString(1),
                     rows.getInt(2),
-                    rows.getInt(3),
-                    rows.getInt(4)
+                    rows.getLong(3),
+                    rows.getLong(4)
             );
             rows.moveToNext();
         }
