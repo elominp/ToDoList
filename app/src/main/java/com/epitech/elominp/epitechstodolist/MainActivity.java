@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupMenuBar();
+        setupTodoList();
         setupListeners();
     }
 
@@ -74,10 +75,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Sets up the adapter of the ToDoList ListView and fill it
+     */
+    protected void setupTodoList() {
+        ExpandableListView todoList = (ExpandableListView) findViewById(R.id.todolistView);
+
+        refreshToDoList();
+    }
+
+    /**
      * Clear the ListView, fetch the list from the database and put it into the ListView.
      */
     protected void refreshToDoList() {
-
+        ExpandableListView todoList = (ExpandableListView) findViewById(R.id.todolistView);
     }
 
     /**
