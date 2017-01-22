@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     private TodoListStorage storage = TodoListStorage.getInstance();
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
      */
     protected void setupListeners() {
         /* ToDoListView configuration */
-        ExpandableListView todoListView = (ExpandableListView) findViewById(R.id.todolistView);
+        ListView todoListView = (ListView) findViewById(R.id.todolistView);
         /* A simple click on an item expand it */
         todoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -85,7 +85,12 @@ public class MainActivity extends AppCompatActivity {
      * Sets up the adapter of the ToDoList ListView and fill it
      */
     protected void setupTodoList() {
-        ExpandableListView todoList = (ExpandableListView) findViewById(R.id.todolistView);
+        ListView todoList = (ListView) findViewById(R.id.todolistView);
+        TodoItemArrayAdapter adapter = new TodoItemArrayAdapter(
+                getApplicationContext(),
+                storage.getAllItems()
+        );
+        todoList.setAdapter(adapter);
 
         refreshToDoList();
     }
@@ -94,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
      * Clear the ListView, fetch the list from the database and put it into the ListView.
      */
     protected void refreshToDoList() {
-        ExpandableListView todoList = (ExpandableListView) findViewById(R.id.todolistView);
+        ListView todoList = (ListView) findViewById(R.id.todolistView);
     }
 
     /**
