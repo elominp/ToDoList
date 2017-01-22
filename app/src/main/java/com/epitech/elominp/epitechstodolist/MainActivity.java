@@ -1,5 +1,7 @@
 package com.epitech.elominp.epitechstodolist;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,10 +12,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     private TodoListStorage storage = TodoListStorage.getInstance();
+    private final Activity me = this;
 
     /**
      * Called when the Activity is created, so at the starting of the application.
@@ -26,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupStorage();
-        setupMenuBar();
+        //setupMenuBar();
         setupTodoList();
         setupListeners();
     }
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         todoListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                return true;
+                return false;
             }
         });
 
@@ -65,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(me, CreateTodoItemActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -109,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        setupMenuBar();
     }
 
     /**
