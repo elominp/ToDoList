@@ -205,6 +205,11 @@ public class TodoListStorage {
         _db.insert("EpitechTodoList", null, row);
     }
 
+    /**
+     * Update todoItem in database with item given in parameter
+     *
+     * @param item to update in database
+     */
     public void updateTodoItem(@NonNull TodoItem item) {
         if (item.id < 0)
             throw new IllegalArgumentException("Invalid todo item");

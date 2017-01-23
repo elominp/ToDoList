@@ -58,6 +58,16 @@ public class TodoListStorageTests {
             Log.d("getAllItems", items[i].title);
     }
 
+    @Test
+    public void updateTodoItemObject() {
+        TodoListStorage.TodoItem[] items = storage.getAllItems();
+
+        if (items.length > 0) {
+            TodoListStorage.TodoItem item = items[0];
+            storage.updateTodoItem(new TodoListStorage.TodoItem(item.id, "", "", 3, 0, 0));
+        }
+    }
+
 
     @Test
     public void useAppContext() throws Exception {
