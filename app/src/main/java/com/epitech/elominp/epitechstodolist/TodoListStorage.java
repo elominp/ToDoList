@@ -62,6 +62,7 @@ public class TodoListStorage {
      * Pseudo-struct grouping all todoItem data
      */
     public static class TodoItem {
+        public final int id;
         public final String title;
         public final String body;
         public final int status;
@@ -77,6 +78,16 @@ public class TodoListStorage {
          * @param e ending date of the item
          */
         public TodoItem(@NonNull String t, @NonNull String b, int s, long c, long e) {
+            id = -1;
+            title = t;
+            body = b;
+            status = s;
+            creationDate = c;
+            endingDate = e;
+        }
+
+        public TodoItem(int i, @NonNull String t, @NonNull String b, int s, long c, long e) {
+            id = i;
             title = t;
             body = b;
             status = s;
@@ -202,7 +213,7 @@ public class TodoListStorage {
     public TodoItem[] getAllItems() {
         if (_context == null)
             throw new RuntimeException("Context not settled");
-        final String[] columns = {"title", "body", "status", "creationDate", "endingDate"};
+        final String[] columns = {"id", "title", "body", "status", "creationDate", "endingDate"};
         Cursor rows = _db.query(
                 "EpitechTodoList",
                 columns,
@@ -219,11 +230,12 @@ public class TodoListStorage {
         rows.moveToFirst();
         for (int i = 0; i < nbRows; i++) {
             items[i] = new TodoItem(
-                    rows.getString(0),
+                    rows.getInt(0),
                     rows.getString(1),
-                    rows.getInt(2),
-                    rows.getLong(3),
-                    rows.getLong(4)
+                    rows.getString(2),
+                    rows.getInt(3),
+                    rows.getLong(4),
+                    rows.getLong(5)
             );
             rows.moveToNext();
         }

@@ -35,7 +35,7 @@ public class TodoItemArrayAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return -1;
+        return _items[i].id;
     }
 
     @NonNull

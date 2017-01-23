@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         setupStorage();
-        //setupMenuBar();
+        setupMenuBar();
         setupTodoList();
         setupListeners();
     }
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(me, CreateTodoItemActivity.class);
                 intent.putExtra(EXTRA_MESSAGE_TITLE, _items[i].title);
-                intent.putExtra(EXTRA_MESSAGE_BODY, _items[i].title);
+                intent.putExtra(EXTRA_MESSAGE_BODY, _items[i].body);
                 startActivity(intent);
             }
         });
@@ -100,14 +100,6 @@ public class MainActivity extends AppCompatActivity {
      * Sets up the adapter of the ToDoList ListView and fill it
      */
     protected void setupTodoList() {
-        ListView todoList = (ListView) findViewById(R.id.todolistView);
-        _items = storage.getAllItems();
-        TodoItemArrayAdapter adapter = new TodoItemArrayAdapter(
-                getApplicationContext(),
-                _items
-        );
-        todoList.setAdapter(adapter);
-
         refreshToDoList();
     }
 
@@ -116,6 +108,12 @@ public class MainActivity extends AppCompatActivity {
      */
     protected void refreshToDoList() {
         ListView todoList = (ListView) findViewById(R.id.todolistView);
+        _items = storage.getAllItems();
+        TodoItemArrayAdapter adapter = new TodoItemArrayAdapter(
+                getApplicationContext(),
+                _items
+        );
+        todoList.setAdapter(adapter);
     }
 
     /**
@@ -125,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        setupMenuBar();
+        refreshToDoList();
     }
 
     /**
