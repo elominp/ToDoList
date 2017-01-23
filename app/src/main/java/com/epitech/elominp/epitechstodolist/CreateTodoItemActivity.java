@@ -27,9 +27,15 @@ public class CreateTodoItemActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         // getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem item = menu.add(0, 0, 0, "Apply").setIcon(R.mipmap.btn_check_buttonless_on);
-        MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+        MenuItem chooseEnd = menu.add(Menu.NONE, Menu.NONE, Menu.NONE,
+                "Choose Ending Date").setIcon(R.mipmap.ic_dialog_time);
+        MenuItemCompat.setShowAsAction(chooseEnd, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+
+        MenuItem apply = menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Apply").setIcon(
+                R.mipmap.btn_check_buttonless_on);
+        MenuItemCompat.setShowAsAction(apply, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+        apply.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if (id != -1) {
@@ -57,6 +63,7 @@ public class CreateTodoItemActivity extends AppCompatActivity {
                 return true;
             }
         });
+
         return true;
     }
 
