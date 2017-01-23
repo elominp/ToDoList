@@ -11,13 +11,19 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
     private TodoListStorage storage = TodoListStorage.getInstance();
     private final Activity me = this;
+    private TodoListStorage.TodoItem[] _items;
+
+    public final static String EXTRA_MESSAGE_TITLE = "com.epitech.elominp.epitechstodolist.MESSAGE_TITLE";
+    public final static String EXTRA_MESSAGE_BODY = "com.epitech.elominp.epitechstodolist.MESSAGE_BODY";
 
     /**
      * Called when the Activity is created, so at the starting of the application.
@@ -48,11 +54,15 @@ public class MainActivity extends AppCompatActivity {
     protected void setupListeners() {
         /* ToDoListView configuration */
         ListView todoListView = (ListView) findViewById(R.id.todolistView);
+        todoListView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
         /* A simple click on an item expand it */
         todoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
+                Intent intent = new Intent(me, CreateTodoItemActivity.class);
+                intent.putExtra(EXTRA_MESSAGE_TITLE, _items[i].title);
+                intent.putExtra(EXTRA_MESSAGE_BODY, _items[i].title);
+                startActivity(intent);
             }
         });
         /* A long click on an item display a menu to edit it / remove it / change it's status */
@@ -91,9 +101,10 @@ public class MainActivity extends AppCompatActivity {
      */
     protected void setupTodoList() {
         ListView todoList = (ListView) findViewById(R.id.todolistView);
+        _items = storage.getAllItems();
         TodoItemArrayAdapter adapter = new TodoItemArrayAdapter(
                 getApplicationContext(),
-                storage.getAllItems()
+                _items
         );
         todoList.setAdapter(adapter);
 

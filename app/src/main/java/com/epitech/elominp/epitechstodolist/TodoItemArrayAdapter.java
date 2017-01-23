@@ -64,6 +64,11 @@ public class TodoItemArrayAdapter extends BaseAdapter {
         }
         else
             end.setText("");
+
+        status.clearFocus();
+        status.setFocusable(false);
+        status.setFocusableInTouchMode(false);
+
         return view;
     }
 }
