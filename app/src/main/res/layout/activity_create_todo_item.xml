@@ -55,10 +55,30 @@
             android:layout_alignParentStart="true"
             android:background="@drawable/textinput"
             android:gravity="top"
-            android:padding="10dp"
-            android:layout_above="@+id/finishEditingButton" />
+            android:padding="10dp" />
 
-        <Button
+        <TextView
+            android:id="@+id/editEndingDateLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editBodyInput"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Enter ending date here :"
+            android:layout_marginTop="10dp"/>
+
+        <DatePicker
+            android:id="@+id/editEndingDateInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editEndingDateLabel"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="10dp">
+
+        </DatePicker>
+
+        <!-- <Button
             android:id="@+id/finishEditingButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,7 +86,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:text="Validate ToDo element"
-            android:gravity="center" />
+            android:gravity="center" /> -->
 
     </RelativeLayout>
 

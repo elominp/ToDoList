@@ -27,8 +27,36 @@ public class CreateTodoItemActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         // getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem item = menu.add(0, 0, 0, "Apply").setIcon(R.mipmap.ic_launcher);
+        MenuItem item = menu.add(0, 0, 0, "Apply").setIcon(R.mipmap.btn_check_buttonless_on);
         MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                if (id != -1) {
+                    TodoListStorage.TodoItem item = new TodoListStorage.TodoItem(
+                            id,
+                            editTitle.getText().toString(),
+                            editBody.getText().toString(),
+                            status,
+                            creationDate,
+                            endingDate
+                    );
+                    TodoListStorage.getInstance().updateTodoItem(item);
+                }
+                else {
+                    TodoListStorage.TodoItem item = new TodoListStorage.TodoItem(
+                            editTitle.getText().toString(),
+                            editBody.getText().toString(),
+                            TodoListStorage.TodoStatus.NOT_DONE.ordinal(),
+                            0,
+                            0
+                    );
+                    TodoListStorage.getInstance().insertTodoItem(item);
+                }
+                finish();
+                return true;
+            }
+        });
         return true;
     }
 
@@ -64,7 +92,7 @@ public class CreateTodoItemActivity extends AppCompatActivity {
         editTitle.setText(title);
         editBody.setText(body);
 
-        Button button = (Button) findViewById(R.id.finishEditingButton);
+        /* Button button = (Button) findViewById(R.id.finishEditingButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,6 +119,6 @@ public class CreateTodoItemActivity extends AppCompatActivity {
                 }
                 finish();
             }
-        });
+        }); */
     }
 }
