@@ -10,6 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class CreateTodoItemActivity extends AppCompatActivity {
+    int         id;
+    String      title;
+    String      body;
+    int         status;
+    int         creationDate;
+    int         endingDate;
+    EditText    editTitle;
+    EditText    editBody;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,11 +25,15 @@ public class CreateTodoItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_todo_item);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_TITLE);
-        String body = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_BODY);
+        id = intent.getIntExtra(MainActivity.EXTRA_MESSAGE_ID, -1);
+        title = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_TITLE);
+        body = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_BODY);
+        status = intent.getIntExtra(MainActivity.EXTRA_MESSAGE_STATUS, 0);
+        creationDate = intent.getIntExtra(MainActivity.EXTRA_MESSAGE_CREATION_DATE, 0);
+        endingDate = intent.getIntExtra(MainActivity.EXTRA_MESSAGE_ENDING_DATE, 0);
 
-        EditText editTitle = (EditText) findViewById(R.id.editTitleInput);
-        EditText editBody = (EditText) findViewById(R.id.editBodyInput);
+        editTitle = (EditText) findViewById(R.id.editTitleInput);
+        editBody = (EditText) findViewById(R.id.editBodyInput);
 
         editTitle.setText(title);
         editBody.setText(body);
@@ -30,6 +42,27 @@ public class CreateTodoItemActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (id != -1) {
+                    TodoListStorage.TodoItem item = new TodoListStorage.TodoItem(
+                            id,
+                            editTitle.getText().toString(),
+                            editBody.getText().toString(),
+                            status,
+                            creationDate,
+                            endingDate
+                    );
+                    TodoListStorage.getInstance().updateTodoItem(item);
+                }
+                else {
+                    TodoListStorage.TodoItem item = new TodoListStorage.TodoItem(
+                            editTitle.getText().toString(),
+                            editBody.getText().toString(),
+                            TodoListStorage.TodoStatus.NOT_DONE.ordinal(),
+                            0,
+                            0
+                    );
+                    TodoListStorage.getInstance().insertTodoItem(item);
+                }
                 finish();
             }
         });

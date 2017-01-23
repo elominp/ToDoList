@@ -205,6 +205,21 @@ public class TodoListStorage {
         _db.insert("EpitechTodoList", null, row);
     }
 
+    public void updateTodoItem(@NonNull TodoItem item) {
+        if (item.id < 0)
+            throw new IllegalArgumentException("Invalid todo item");
+        ContentValues row = new ContentValues();
+
+        row.put("title", item.title);
+        row.put("body", item.body);
+        if (item.endingDate != 0)
+            row.put("endingDate", item.endingDate);
+
+        String[] args = {Integer.toString(item.id)};
+
+        _db.update("EpitechTodoList", row, "id = ?", args);
+    }
+
     /**
      * Function used to get all todoItems stored inside the database
      * @return an array of TodoItem containing all items stored inside the database

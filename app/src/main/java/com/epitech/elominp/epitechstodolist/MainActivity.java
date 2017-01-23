@@ -22,8 +22,12 @@ public class MainActivity extends AppCompatActivity {
     private final Activity me = this;
     private TodoListStorage.TodoItem[] _items;
 
-    public final static String EXTRA_MESSAGE_TITLE = "com.epitech.elominp.epitechstodolist.MESSAGE_TITLE";
-    public final static String EXTRA_MESSAGE_BODY = "com.epitech.elominp.epitechstodolist.MESSAGE_BODY";
+    public final static String EXTRA_MESSAGE_ID             = "com.epitech.elominp.epitechstodolist.MESSAGE_ID";
+    public final static String EXTRA_MESSAGE_TITLE          = "com.epitech.elominp.epitechstodolist.MESSAGE_TITLE";
+    public final static String EXTRA_MESSAGE_BODY           = "com.epitech.elominp.epitechstodolist.MESSAGE_BODY";
+    public final static String EXTRA_MESSAGE_STATUS         = "com.epitech.elominp.epitechstodolist.MESSAGE_STATUS";
+    public final static String EXTRA_MESSAGE_CREATION_DATE  = "com.epitech.elominp.epitechstodolist.MESSAGE_CREATION_DATE";
+    public final static String EXTRA_MESSAGE_ENDING_DATE    = "com.epitech.elominp.epitechstodolist.MESSAGE_ENDING_DATE";
 
     /**
      * Called when the Activity is created, so at the starting of the application.
@@ -60,8 +64,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(me, CreateTodoItemActivity.class);
+                intent.putExtra(EXTRA_MESSAGE_ID, _items[i].id);
                 intent.putExtra(EXTRA_MESSAGE_TITLE, _items[i].title);
                 intent.putExtra(EXTRA_MESSAGE_BODY, _items[i].body);
+                intent.putExtra(EXTRA_MESSAGE_STATUS, _items[i].status);
+                intent.putExtra(EXTRA_MESSAGE_CREATION_DATE, _items[i].creationDate);
+                intent.putExtra(EXTRA_MESSAGE_ENDING_DATE, _items[i].endingDate);
                 startActivity(intent);
             }
         });
