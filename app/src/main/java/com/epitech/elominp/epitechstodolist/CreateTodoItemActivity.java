@@ -1,10 +1,13 @@
 package com.epitech.elominp.epitechstodolist;
 
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +22,15 @@ public class CreateTodoItemActivity extends AppCompatActivity {
     int         endingDate;
     EditText    editTitle;
     EditText    editBody;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        // getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem item = menu.add(0, 0, 0, "Apply").setIcon(R.mipmap.ic_launcher);
+        MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
