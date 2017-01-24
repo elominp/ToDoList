@@ -192,16 +192,18 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        MenuItem addItem = menu.add(Menu.NONE, Menu.NONE, Menu.NONE,
-                "add item").setIcon(R.mipmap.ic_launcher);
-        MenuItemCompat.setShowAsAction(addItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
-        addItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                startCreateItemActivity();
-                return true;
-            }
-        });
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+            MenuItem addItem = menu.add(Menu.NONE, Menu.NONE, Menu.NONE,
+                    "add item").setIcon(R.mipmap.ic_menu_add);
+            MenuItemCompat.setShowAsAction(addItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+            addItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    startCreateItemActivity();
+                    return true;
+                }
+            });
+        }
         return true;
     }
 
