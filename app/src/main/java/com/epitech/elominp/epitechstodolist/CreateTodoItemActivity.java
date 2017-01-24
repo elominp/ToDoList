@@ -1,16 +1,11 @@
 package com.epitech.elominp.epitechstodolist;
 
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 public class CreateTodoItemActivity extends AppCompatActivity {
@@ -81,6 +76,8 @@ public class CreateTodoItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_todo_item);
 
+        if (getSupportActionBar() == null)
+            return;
         getSupportActionBar().setTitle("Editing");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -98,34 +95,5 @@ public class CreateTodoItemActivity extends AppCompatActivity {
 
         editTitle.setText(title);
         editBody.setText(body);
-
-        /* Button button = (Button) findViewById(R.id.finishEditingButton);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (id != -1) {
-                    TodoListStorage.TodoItem item = new TodoListStorage.TodoItem(
-                            id,
-                            editTitle.getText().toString(),
-                            editBody.getText().toString(),
-                            status,
-                            creationDate,
-                            endingDate
-                    );
-                    TodoListStorage.getInstance().updateTodoItem(item);
-                }
-                else {
-                    TodoListStorage.TodoItem item = new TodoListStorage.TodoItem(
-                            editTitle.getText().toString(),
-                            editBody.getText().toString(),
-                            TodoListStorage.TodoStatus.NOT_DONE.ordinal(),
-                            0,
-                            0
-                    );
-                    TodoListStorage.getInstance().insertTodoItem(item);
-                }
-                finish();
-            }
-        }); */
     }
 }

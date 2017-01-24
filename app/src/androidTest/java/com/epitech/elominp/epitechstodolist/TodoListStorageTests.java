@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class TodoListStorageTests {
-    TodoListStorage storage = TodoListStorage.getInstance();
+    private TodoListStorage storage = TodoListStorage.getInstance();
 
     @Before
     public void configure() {
@@ -53,9 +53,8 @@ public class TodoListStorageTests {
 
     @Test
     public void getAllItems() {
-        TodoListStorage.TodoItem[] items = storage.getAllItems();
-        for (int i = 0; i < items.length; i++)
-            Log.d("getAllItems", items[i].title);
+        for (TodoListStorage.TodoItem item : storage.getAllItems())
+            Log.d("getAllItems", item.title);
     }
 
     @Test
