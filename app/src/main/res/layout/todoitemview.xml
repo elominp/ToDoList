@@ -12,42 +12,16 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:id="@+id/bodyText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titleText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="14sp"
-        android:textSize="14sp"
-        android:gravity="start"
-        android:text="Body\nMultiline"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/creationDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:text="Created 01/01/2017"
-        android:gravity="right"
-        android:layout_below="@+id/bodyText"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="@android:color/black" />
-
-    <TextView
         android:id="@+id/endingDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:text="Ends 01/01/2017"
         android:gravity="right"
-        android:layout_alignBaseline="@+id/status"
-        android:layout_alignBottom="@+id/status"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/titleText"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="@android:color/black" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/titleText"
@@ -56,11 +30,37 @@
         android:textSize="20sp"
         android:gravity="start"
         android:text="Titre"
-        android:layout_marginLeft="6sp"
-        android:layout_marginStart="6sp"
-        android:layout_marginTop="3sp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:textColor="@android:color/black"
+        android:layout_alignBottom="@+id/status"
         android:layout_toRightOf="@+id/status"
-        android:layout_toEndOf="@+id/status"
-        android:textColor="@android:color/black" />
+        android:layout_toEndOf="@+id/status" />
+
+    <TextView
+        android:id="@+id/creationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="Created 01/01/2017"
+        android:gravity="right"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/bodyText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="13dp" />
+
+    <TextView
+        android:id="@+id/bodyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="14sp"
+        android:gravity="start"
+        android:text="Body\nMultiline"
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/endingDate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
