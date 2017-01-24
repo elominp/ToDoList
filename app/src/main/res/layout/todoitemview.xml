@@ -22,7 +22,7 @@
         android:textSize="14sp"
         android:gravity="start"
         android:text="Body\nMultiline"
-        />
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/creationDate"
@@ -33,7 +33,8 @@
         android:gravity="right"
         android:layout_below="@+id/bodyText"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/endingDate"
@@ -45,7 +46,8 @@
         android:layout_alignBaseline="@+id/status"
         android:layout_alignBottom="@+id/status"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/titleText"
@@ -58,6 +60,7 @@
         android:layout_marginStart="6sp"
         android:layout_marginTop="3sp"
         android:layout_toRightOf="@+id/status"
-        android:layout_toEndOf="@+id/status" />
+        android:layout_toEndOf="@+id/status"
+        android:textColor="@android:color/black" />
 
 </RelativeLayout>

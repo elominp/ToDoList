@@ -2,6 +2,7 @@ package com.epitech.elominp.epitechstodolist;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -84,14 +85,19 @@ public class MainActivity extends AppCompatActivity {
 
         /* Floating add button configuration */
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        /* Clicking on the floating add button will go the activity creating a new item */
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(me, CreateTodoItemActivity.class);
-                startActivity(intent);
-            }
-        });
+
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
+            ((ViewGroup) fab.getParent()).removeView(fab);
+        }
+        else {
+            /* Clicking on the floating add button will go the activity creating a new item */
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startCreateItemActivity();
+                }
+            });
+        }
     }
 
     /**
@@ -185,6 +191,17 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem addItem = menu.add(Menu.NONE, Menu.NONE, Menu.NONE,
+                "add item").setIcon(R.mipmap.ic_launcher);
+        MenuItemCompat.setShowAsAction(addItem, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+        addItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                startCreateItemActivity();
+                return true;
+            }
+        });
         return true;
     }
 
@@ -201,5 +218,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void startCreateItemActivity() {
+        Intent intent = new Intent(me, CreateTodoItemActivity.class);
+        startActivity(intent);
     }
 }
