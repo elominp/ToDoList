@@ -59,7 +59,7 @@ public class TodoItemArrayAdapter extends BaseAdapter {
         creation.setText("Created " + format.format(creationDate));
 
         if (_items[position].endingDate != 0) {
-            Date endingDate = new Date(_items[position].creationDate * 1000);
+            Date endingDate = new Date(_items[position].endingDate * 1000);
             end.setText("Ending " + format.format(endingDate));
         }
         else
