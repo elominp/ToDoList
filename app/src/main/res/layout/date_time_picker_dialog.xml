@@ -10,14 +10,16 @@
         android:id="@+id/date_time_picker_dialog_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" >
+        android:layout_gravity="center_horizontal"
+        android:datePickerMode="spinner">
 
     </DatePicker>
 
     <TimePicker
         android:id="@+id/date_time_picker_dialog_time"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner">
 
     </TimePicker>
 

@@ -2,12 +2,17 @@ package com.epitech.elominp.epitechstodolist;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.DatePicker;
 import android.widget.EditText;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class CreateTodoItemActivity extends AppCompatActivity {
     private int         id;
@@ -32,6 +37,21 @@ public class CreateTodoItemActivity extends AppCompatActivity {
 
                 endDialog.setContentView(R.layout.date_time_picker_dialog);
                 endDialog.setTitle("Choose ending date");
+
+                if (Build.VERSION.SDK_INT >= 11) {
+                    try {
+                        DatePicker picker = (DatePicker) endDialog.findViewById(
+                                R.id.date_time_picker_dialog_date);
+                        Method setCalendarViewShown = picker.getClass().getMethod(
+                                "setCalendarViewShown",
+                                boolean.class
+                        );
+                        setCalendarViewShown.invoke(picker, false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 endDialog.show();
 
                 return true;
