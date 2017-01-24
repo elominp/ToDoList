@@ -1,5 +1,6 @@
 package com.epitech.elominp.epitechstodolist;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +10,12 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 public class CreateTodoItemActivity extends AppCompatActivity {
-    int         id;
-    String      title;
-    String      body;
-    int         status;
-    int         creationDate;
-    int         endingDate;
-    EditText    editTitle;
-    EditText    editBody;
+    private int         id;
+    private int         status;
+    private int         creationDate;
+    private int         endingDate;
+    private EditText    editTitle;
+    private EditText    editBody;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -26,6 +25,18 @@ public class CreateTodoItemActivity extends AppCompatActivity {
         MenuItem chooseEnd = menu.add(Menu.NONE, Menu.NONE, Menu.NONE,
                 "Choose Ending Date").setIcon(R.mipmap.ic_dialog_time);
         MenuItemCompat.setShowAsAction(chooseEnd, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+        chooseEnd.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Dialog endDialog = new Dialog(CreateTodoItemActivity.this);
+
+                endDialog.setContentView(R.layout.date_time_picker_dialog);
+                endDialog.setTitle("Choose ending date");
+                endDialog.show();
+
+                return true;
+            }
+        });
 
         MenuItem apply = menu.add(Menu.NONE, Menu.NONE, Menu.NONE, "Apply").setIcon(
                 R.mipmap.btn_check_buttonless_on);
@@ -84,8 +95,8 @@ public class CreateTodoItemActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getIntExtra(MainActivity.EXTRA_MESSAGE_ID, -1);
-        title = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_TITLE);
-        body = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_BODY);
+        String title = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_TITLE);
+        String body = intent.getStringExtra(MainActivity.EXTRA_MESSAGE_BODY);
         status = intent.getIntExtra(MainActivity.EXTRA_MESSAGE_STATUS, 0);
         creationDate = intent.getIntExtra(MainActivity.EXTRA_MESSAGE_CREATION_DATE, 0);
         endingDate = intent.getIntExtra(MainActivity.EXTRA_MESSAGE_ENDING_DATE, 0);
