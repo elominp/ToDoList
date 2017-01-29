@@ -1,6 +1,7 @@
 package com.epitech.elominp.epitechstodolist;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,11 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     private TodoListStorage storage = TodoListStorage.getInstance();
-    private final Activity me = this;
+    private final MainActivity me = this;
     private TodoListStorage.TodoItem[] _items;
 
     public final static String EXTRA_MESSAGE_ID             = "com.epitech.elominp.epitechstodolist.MESSAGE_ID";
@@ -74,8 +76,33 @@ public class MainActivity extends AppCompatActivity {
         /* A long click on an item display a menu to edit it / remove it / change it's status */
         todoListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                return false;
+            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, int i, long l) {
+                final Dialog removeDialog = new Dialog(MainActivity.this);
+                final ListView todoListView = (ListView) findViewById(R.id.todolistView);
+                final int itemPosition = i;
+
+                removeDialog.setContentView(R.layout.remove_item);
+                removeDialog.setTitle("Remove item");
+
+                Button cancel = (Button) removeDialog.findViewById(R.id.remove_item_cancel);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        removeDialog.dismiss();
+                    }
+                });
+
+                Button ok = (Button) removeDialog.findViewById(R.id.remove_item_ok);
+                ok.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        storage.removeItem((TodoListStorage.TodoItem) todoListView.getAdapter().getItem(itemPosition));
+                        me.refreshToDoList();
+                        removeDialog.dismiss();
+                    }
+                });
+                removeDialog.show();
+                return true;
             }
         });
 

@@ -263,6 +263,18 @@ public class TodoListStorage {
         return items;
     }
 
+    @NonNull
+    public void removeItem(@NonNull TodoItem item) {
+        _db.execSQL("DELETE FROM EpitechTodoList WHERE id = " + Integer.toString(item.id) + ";");
+    }
+
     private TodoListStorage() {
+    }
+
+    @Override
+    public void finalize() throws Throwable {
+        super.finalize();
+        if (_db != null)
+            _db.close();
     }
 }
