@@ -2,6 +2,7 @@ package com.epitech.elominp.epitechstodolist;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,29 @@ public class TodoItemArrayAdapter extends BaseAdapter {
         status.clearFocus();
         status.setFocusable(false);
         status.setFocusableInTouchMode(false);
+        status.setTag(_items[position]);
+        status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("checkbox", "clicked");
+                TodoListStorage.TodoItem item = (TodoListStorage.TodoItem) view.getTag();
+                if (item == null)
+                    return;
+                Log.e("checkbox", "do ops");
+                int status = (item.status == TodoListStorage.TodoStatus.DONE.ordinal()) ?
+                        TodoListStorage.TodoStatus.NOT_DONE.ordinal() :
+                        TodoListStorage.TodoStatus.DONE.ordinal();
+                Log.e("status", Integer.toString(item.id));
+                TodoListStorage.getInstance().updateTodoItem(new TodoListStorage.TodoItem(
+                        item.id,
+                        item.title,
+                        item.body,
+                        status,
+                        item.creationDate,
+                        item.endingDate
+                ));
+            }
+        });
 
         return view;
     }
