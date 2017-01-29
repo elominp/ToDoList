@@ -13,6 +13,14 @@ android {
     }
     buildTypes {
         release {
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    project.ext {
+                        appName = 'todolist'
+                    }
+                    output.outputFile = new File(output.outputFile.parent, 'todolist.apk')
+                }
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
