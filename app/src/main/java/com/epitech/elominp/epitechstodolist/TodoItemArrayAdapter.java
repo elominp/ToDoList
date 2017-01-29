@@ -73,23 +73,13 @@ public class TodoItemArrayAdapter extends BaseAdapter {
         status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("checkbox", "clicked");
                 TodoListStorage.TodoItem item = (TodoListStorage.TodoItem) view.getTag();
                 if (item == null)
                     return;
-                Log.e("checkbox", "do ops");
-                int status = (item.status == TodoListStorage.TodoStatus.DONE.ordinal()) ?
+                item.status = (item.status == TodoListStorage.TodoStatus.DONE.ordinal()) ?
                         TodoListStorage.TodoStatus.NOT_DONE.ordinal() :
                         TodoListStorage.TodoStatus.DONE.ordinal();
-                Log.e("status", Integer.toString(item.id));
-                TodoListStorage.getInstance().updateTodoItem(new TodoListStorage.TodoItem(
-                        item.id,
-                        item.title,
-                        item.body,
-                        status,
-                        item.creationDate,
-                        item.endingDate
-                ));
+                TodoListStorage.getInstance().updateTodoItem(item);
             }
         });
 

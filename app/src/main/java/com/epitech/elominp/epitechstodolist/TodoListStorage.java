@@ -62,12 +62,12 @@ public class TodoListStorage {
      * Pseudo-struct grouping all todoItem data
      */
     public static class TodoItem {
-        public final int id;
-        public final String title;
-        public final String body;
-        public final int status;
-        public final long creationDate;
-        public final long endingDate;
+        public int id;
+        public String title;
+        public String body;
+        public int status;
+        public long creationDate;
+        public long endingDate;
 
         /**
          * Build the struct with given parameters
@@ -217,8 +217,8 @@ public class TodoListStorage {
 
         row.put("title", item.title);
         row.put("body", item.body);
-        if (item.endingDate != 0)
-            row.put("endingDate", item.endingDate);
+        row.put("status", item.status);
+        row.put("endingDate", item.endingDate);
 
         String[] args = {Integer.toString(item.id)};
 
